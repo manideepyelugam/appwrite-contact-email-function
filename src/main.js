@@ -12,7 +12,7 @@ export default async ({ req, res, log, error }) => {
 
   try {
     // Parse the request data
-    const data = JSON.parse(req.body.data || '{}')
+const data = req.body ? JSON.parse(req.body) : {}
     const { to, name, subject, message } = data
 
     if (!to || !name) {
@@ -28,7 +28,7 @@ export default async ({ req, res, log, error }) => {
       port: parseInt(process.env.SMTP_PORT || '587'),
       secure: process.env.SMTP_PORT === '465', // true for 465, false for other ports
       auth: {
-        user: process.env.SMTP_USER,
+        user: process.env.SMTP_USERNAME,
         pass: process.env.SMTP_PASSWORD,
       },
     })
@@ -141,7 +141,7 @@ export default async ({ req, res, log, error }) => {
 
     // Send email
     const info = await transporter.sendMail({
-      from: `"Fairlx Support" <${process.env.SMTP_FROM || process.env.SMTP_USER}>`,
+      from: `"Fairlx Support" <${process.env.SUBMIT_EMAIL || process.env.SMTP_USERNAME}>`,
       to: to,
       subject: subject || 'Thank you for contacting Fairlx',
       html: htmlContent,
