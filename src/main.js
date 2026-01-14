@@ -1,7 +1,17 @@
 export default async ({ req, res, log }) => {
   log("Contact email function triggered");
 
-  const body = req.bodyJson || {};
+  let body;
+  try {
+    body = req.bodyJson || {};
+  } catch (error) {
+    log("Error parsing request body:", error);
+    return res.json({
+      success: false,
+      message: "Invalid JSON in request body",
+      error: error.message
+    }, 400);
+  }
 
   log("Received data:", body);
 
