@@ -10,6 +10,8 @@ export default async ({ req, res, log, error }) => {
     .setProject(process.env.APPWRITE_PROJECT_ID || '')
     .setKey(process.env.APPWRITE_API_KEY || '')
 
+  console.log("RAW BODY:", req.body)
+
   try {
     // Parse the request data
 const data = req.body ? JSON.parse(req.body) : {}
