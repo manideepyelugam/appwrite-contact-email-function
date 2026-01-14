@@ -1,6 +1,10 @@
 {
-  "name": "appwrite-contact-email-function",
+  "name": "send-email-function",
   "version": "1.0.0",
-  "type": "module",
-  "dependencies": {}
+  "description": "Appwrite function to send confirmation emails via SMTP",
+  "main": "main.js",
+  "dependencies": {
+    "node-appwrite": "^14.1.0",
+    "nodemailer": "^6.9.8"
+  }
 }
